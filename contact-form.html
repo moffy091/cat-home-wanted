@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png">
+  <title>お問い合わせ</title>
+</head>
+
+<body>
+  <header>
+    <h1>
+      <a href="index.html">
+        <img src="rogo.png" alt="ロゴ画像" width="300" height="190">
+      </a>
+    </h1>
+  </header>
+
+  <div class="container">
+    <!-- 譲渡条件 -->
+    <section class="adoption-text">
+      <h2>譲渡条件</h2>
+      <div class="adoption-conditions">
+        <p>譲渡には一定の審査があります。</p>
+        <ul>
+          <li>家族全員の同意があること</li>
+          <li>譲渡前に飼育環境の確認に協力いただくこと</li>
+          <li>完全室内飼いを約束できること</li>
+          <li>必要な医療費を負担できること</li>
+          <li>適切な飼育環境を提供できること</li>
+          <li>定期的な近況報告をしていただくこと</li>
+          <li>誓約違反の場合、猫を引き戻す場合があります</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- お問い合わせフォーム -->
+    <section class="contact-form-section">
+      <h2>問い合わせフォーム</h2>
+      <form class="contact-form" action="thanks.html" method="get">
+        
+        <div>
+          <label for="name">お名前</label>
+          <input type="text" id="name" name="name" placeholder="お名前" required>
+        </div>
+
+        <div>
+          <label for="phone">お電話番号</label>
+          <input type="tel" id="phone" name="phone" placeholder="お電話番号" required>
+        </div>
+
+        <div>
+          <label for="email">メールアドレス</label>
+          <input type="email" id="email" name="email" placeholder="メールアドレス" required>
+        </div>
+
+        <div>
+          <label for="address">ご住所</label>
+          <input type="text" id="address" name="address" placeholder="ご住所">
+        </div>
+
+        <div>
+          <label for="message">問い合わせ内容</label>
+          <textarea id="message" name="message" placeholder="問い合わせ内容を入力してください" rows="5"></textarea>
+        </div>
+
+        <div class="send">
+          <button type="submit">送信</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <footer>
+    <small>(c) hogonekodantai</small>
+  </footer>
+</body>
+</html>
