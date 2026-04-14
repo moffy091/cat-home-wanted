@@ -48,6 +48,7 @@ header h1 {
 
 /* フッターの見た目を設定 */
 footer {
+  margin-top: auto;
   background-color: #f0e6dc;
   text-align: center;
   padding: 16px 0;
