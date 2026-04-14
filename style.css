@@ -63,7 +63,7 @@ h2 {
 
 /* 各 section の下に余白を付ける */
 section {
-  margin-bottom: 64px;
+  margin-bottom: 0;
 }
 
 /* ページ全体の最大幅と左右余白 */
@@ -81,6 +81,9 @@ section {
   margin: 0 auto;
 }
 
+.cat-list {
+  margin-bottom: 64px;
+}
 /* 一覧ページのカードの見た目 */
 .cat-card {
   background-color: #f8f8f8;
