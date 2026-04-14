@@ -1,73 +1,100 @@
 @charset "utf-8";
 
+/* 全ての要素でpaddingとborderを幅計算に含める */
+
 * {
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Noto Sans JP', sans-serif;
-  color: #604029;
-  background-color: #fffaf5;
-  line-height: 1.6;
-  margin: 0;
-}
-
+/* ページ全体の高さを確保し、余計な余白を消す */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+
+/* サイト全体の基本文字色・背景色・行間を設定する */
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  color: #604029;
+  background-color: #fffaf5;
+  line-height: 1.6;
+}
+
+/* ヘッダー・メイン・フッターを縦並びにし、画面全体の高さを使う */
+.wrapper {
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
 
-.wrapper {
+/* メイン部分を伸ばして、フッターを押し下げる */
+main {
   flex: 1;
 }
+
+/* ヘッダーの背景色・中央寄せ・影 */
 header {
   background-color: #f0e6dc;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* h1 の余白を消してロゴ周りを整える */
 header h1 {
   margin: 0;
 }
 
+/* フッターの見た目を設定 */
+footer {
+  background-color: #f0e6dc;
+  text-align: center;
+  padding: 16px 0;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 見出しの下線と余白 */
 h2 {
   border-bottom: 2px solid #604029;
   padding-bottom: 0.5rem;
 }
 
+/* 各 section の下に余白を付ける */
 section {
   margin-bottom: 64px;
 }
 
+/* ページ全体の最大幅と左右余白 */
 .container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 0 64px;
+  padding: 0 32px;
+}
+/* 猫一覧をグリッド表示にする */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  justify-items: center;
+  margin: 0 auto;
 }
 
+/* 一覧ページのカードの見た目 */
 .cat-card {
   background-color: #f8f8f8;
   border-radius: 8px;
   padding: 16px;
-  width: 200px;
+  width: 100%;
+  max-width: 230px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.cat-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  justify-content: center;
-  max-width: 800px;
-  margin: 0 auto;
-}
 
-/* 猫の写真 */
+
+/* 一覧ページとプロフィールページの画像を共通で揃える */
 .cat-card img,
 .profile-content img {
   max-width: 100%;
@@ -77,15 +104,85 @@ section {
   border-radius: 8px;
 }
 
-/* 猫プロフィールページ */
+/* プロフィール画像を拡大できることがわかるようにする */
+.profile-content img {
+  cursor: zoom-in;
+}
+
+/* 画像拡大用のモーダル背景 */
+.zoom-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 1000;
+}
+
+/* 拡大モーダルを表示する時の状態 */
+.zoom-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* モーダル内の拡大画像サイズ */
+.zoom-modal img {
+  max-width: min(90vw, 720px);
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+/* モーダル右上の閉じるボタン */
+.zoom-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #604029;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+/* 閉じるボタンにマウスを乗せた時 */
+.zoom-modal-close:hover {
+  background-color: #ffffff;
+}
+
+/* 一覧ページで画像リンク全体をブロック化する */
+.cat-image-link {
+  display: block;
+}
+
+/* 一覧ページの画像ホバー演出 */
+.cat-image-link img {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
+}
+
+/* 一覧ページの画像にマウスを乗せた時少し拡大する */
+.cat-image-link:hover img {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+/* 猫プロフィールページの見た目 */
 .cat-card1 {
   background-color: #f8f8f8;
   border-radius: 8px;
   padding: 16px;
   text-align: left;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0px auto 16px;
 }
 
+/* プロフィールの画像と説明文を縦並びにする */
 .profile-content {
   display: flex;
   flex-direction: column;
@@ -93,14 +190,16 @@ section {
   gap: 8px;
 }
 
+/* ボタンを縦並びにして中央寄せ */
 .button-group {
   display: flex;
   flex-direction: column;
-  gap:  16px;
+  gap: 16px;
   align-items: center;
   margin-top: 16px;
 }
 
+/* 譲渡条件のブロックを縦並びに整える */
 .adoption-conditions {
   display: flex;
   flex-direction: column;
@@ -109,6 +208,7 @@ section {
   margin: 0 auto;
 }
 
+/* お問い合わせのフォーム入力を縦並びにする */
 .contact-form {
   display: flex;
   flex-direction: column;
@@ -117,16 +217,20 @@ section {
   margin: 0 auto;
 }
 
+/* フォームのラベルを太文字にする */
 .contact-form label {
   font-weight: bold;
 }
 
+/* 入力欄にフォーカスしたときに見やすくする */
 .contact-form input:focus,
 .contact-form textarea:focus {
   border-color: #ff9900;
   outline: none;
   box-shadow: 0 0 4px rgba(255, 153, 0, 0.6);
 }
+
+/* 送信ボタン周りを中央寄せにする */
 .send {
   margin: 16px;
   display: flex;
@@ -134,8 +238,7 @@ section {
   align-items: center;
 }
 
-
-/* ボタン */
+/* ボタン全体のデザイン */
 button,
 .detail-button {
   padding: 8px 16px;
@@ -145,58 +248,75 @@ button,
   border-radius: 4px;
   cursor: pointer;
   text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
+/* ボタンにマウスを乗せた時濃い色にする */
+button:hover,
 .detail-button:hover {
   background-color: #e68a00;
 }
 
-/* フッター */
-footer {
-  background-color: #f0e6dc;
-  text-align: center;
-  padding: 16px 0;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-}
 
-/* スマホ幅 */
+/* スマホ幅の調整 */
 @media screen and (max-width: 600px) {
+
+  /* 左右の余白を少し狭くする */
   .container {
     padding: 0 16px;
   }
 
+  /* １列表示にする */
   .cat-grid {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
+    justify-items: center;
   }
 
+  /* カード幅を固定 */
   .cat-card {
-    width: 100%;
-    max-width: 200px;
+    max-width: 230px;
   }
 
+  /* ボタンを縦並びにする */
   .button-group {
     flex-direction: column;
   }
 }
 
-/* 横並び */
+/* タブレット・PC幅の調整 */
 @media screen and (min-width: 768px) {
+  /* プロフィール画像と文章を横並びにする */
   .profile-content {
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
     text-align: left;
+    gap: 24px;
   }
 
+  /* 文章幅を揃えてページごとの差を減らす */
+  .profile-content p {
+    width: 260px;
+    margin:  0;
+  }
+
+  /* プロフィールカードが広がりすぎないようにする */
   .cat-card1 {
     display: flex;
     flex-direction: column;
     gap: 24px;
+    max-width: 760px;
   }
 
+  /* ボタンを横並びにする */
   .button-group {
     flex-direction: row;
     justify-content: center;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .cat-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
