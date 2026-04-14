@@ -154,13 +154,6 @@ section {
   cursor: pointer;
 }
 
-.zoomable-image {
-  cursor: pointer;
-}
-
-.zoomable-image {
-  opacity: 0.85;
-}
 
 /* 閉じるボタンにマウスを乗せた時 */
 .zoom-modal-close:hover {
