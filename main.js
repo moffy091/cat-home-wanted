@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 各プロフィール画像にクリックイベントをつける
   images.forEach((image) => {
-    image.addEventListener('click', () => openModal(image));
-    image.addEventListener('touchend',() => openModal(image));
+    image.addEventListener('pointerup', () => openModal(image));
+ 
   });
 
   // 閉じるボタンを押したらモーダルを閉じる
