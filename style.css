@@ -204,6 +204,38 @@ section {
   margin-top: 16px;
 }
 
+.profile-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.arrow-button,
+.arrow-button-disabled {
+  min-width: 120px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  text-align: center;
+}
+
+.arrow-button {
+  background-color: #f0e6dc;
+  color: #604029;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.arrow-button:hover {
+  background-color: #e2d2c2;
+}
+
+.arrow-button-disabled {
+  color: #b19a86;
+  background-color: #f5eee7;
+}
+
 /* 譲渡条件のブロックを縦並びに整える */
 .adoption-conditions {
   display: flex;
@@ -285,6 +317,17 @@ button:hover,
   /* ボタンを縦並びにする */
   .button-group {
     flex-direction: column;
+  }
+
+  .profile-navigation {
+    gap: 12px;
+  }
+
+  .arrow-button,
+  .arrow-button-disabled {
+    min-width: 100px;
+    padding: 8px 12px;
+    font-size: 0.95rem;
   }
 }
 
