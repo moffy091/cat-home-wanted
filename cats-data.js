@@ -1,0 +1,115 @@
+// 猫の追加・修正はこの配列だけ編集すれば、一覧と詳細に反映されます。
+window.CATS = [
+  {
+    id: 'mike',
+    name: 'ミケ',
+    age: '8歳',
+    gender: '女の子',
+    image: 'cat.png',
+    alt: 'ミケの写真',
+    shortDescription: '8歳の女の子です。',
+    profileLines: [
+      '8歳の女の子です。',
+      'ワクチン接種済み',
+      '大人しく、甘えん坊な性格です。'
+    ]
+  },
+  {
+    id: 'kuro',
+    name: 'クロ',
+    age: '1歳',
+    gender: '男の子',
+    image: 'cat2.png',
+    alt: 'クロの写真',
+    shortDescription: '1歳の男の子です。',
+    profileLines: [
+      '1歳の男の子です。',
+      'ワクチン接種済み',
+      '甘えん坊の遊び盛りです。'
+    ]
+  },
+  {
+    id: 'kijitora',
+    name: 'キジトラ',
+    age: '6歳',
+    gender: '男の子',
+    image: 'cat3.png',
+    alt: 'キジトラの写真',
+    shortDescription: '6歳の男の子です。',
+    profileLines: [
+      '6歳の男の子です。',
+      'ワクチン接種済み',
+      '人見知りがちですが、優しい性格です。'
+    ]
+  },
+  {
+    id: 'shiro',
+    name: 'シロ',
+    age: '3歳',
+    gender: '男の子',
+    image: 'cat4.png',
+    alt: 'シロの写真',
+    shortDescription: '3歳の男の子です。',
+    profileLines: [
+      '3歳の男の子です。',
+      'ワクチン接種済み',
+      '人慣れ訓練中です。'
+    ]
+  },
+  {
+    id: 'chatora',
+    name: 'チャトラ',
+    age: '2歳',
+    gender: '女の子',
+    image: 'cat5.png',
+    alt: 'チャトラの写真',
+    shortDescription: '2歳の女の子です。',
+    profileLines: [
+      '2歳の女の子です。',
+      'ワクチン接種済み',
+      '人だけでなく猫同士仲良くできます。'
+    ]
+  },
+  {
+    id: 'shirokuro',
+    name: 'シロクロ',
+    age: '1歳',
+    gender: '男の子',
+    image: 'cat6.png',
+    alt: 'シロクロの写真',
+    shortDescription: '1歳の男の子です。',
+    profileLines: [
+      '1歳の男の子です。',
+      'ワクチン接種済み',
+      '元気な性格。遊ぶのが大好き。'
+    ]
+  },
+  {
+    id: 'fuwafuwa',
+    name: 'フワフワ',
+    age: '4歳',
+    gender: '女の子',
+    image: 'cat7.png',
+    alt: 'フワフワの写真',
+    shortDescription: '4歳の女の子です。',
+    profileLines: [
+      '4歳の女の子です。',
+      'ワクチン接種済み',
+      '穏やかな性格です。'
+    ]
+  },
+  {
+    id: 'sabi',
+    name: 'サビ',
+    age: '3歳',
+    gender: '女の子',
+    image: 'cat8.png',
+    alt: 'サビの写真',
+    shortDescription: '3歳の女の子です。',
+    profileLines: [
+      '3歳の女の子です。',
+      'ワクチン接種済み',
+      '元気な性格です。'
+    ]
+  }
+];

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png">
+  <title>猫のプロフィール</title>
+</head>
+
+<body data-page="profile">
+  <div class="wrapper">
+    <header>
+      <h1>
+        <a href="index.html">
+          <img src="rogo.png" alt="ロゴ画像" width="300" height="190">
+        </a>
+      </h1>
+    </header>
+
+    <main>
+      <div class="container">
+        <h2>プロフィール</h2>
+
+        <section class="cat-card1" id="profile-card">
+          <div class="profile-content">
+            <img id="profile-image" src="" alt="" width="200" height="200" class="zoomable-image">
+            <p id="profile-text"></p>
+          </div>
+
+          <div class="button-group">
+            <a href="index.html" class="detail-button">トップページへ戻る</a>
+            <a href="contact-form.html" class="detail-button" id="contact-link">問い合わせはこちら</a>
+          </div>
+
+          <div class="profile-navigation">
+            <a href="#" class="arrow-button" id="prev-link">← 前へ</a>
+            <span class="arrow-button-disabled" id="prev-disabled" aria-hidden="true">← 前へ</span>
+            <a href="#" class="arrow-button" id="next-link">次へ →</a>
+            <span class="arrow-button-disabled" id="next-disabled" aria-hidden="true">次へ →</span>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <small>(c) hogonekodantai</small>
+    </footer>
+  </div>
+  <script src="cats-data.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
