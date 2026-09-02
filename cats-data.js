@@ -5,7 +5,7 @@ window.CATS = [
     name: 'ミケ',
     age: '8歳',
     gender: '女の子',
-    image: 'cat.png',
+    image: 'image/cat.png',
     alt: 'ミケの写真',
     shortDescription: '8歳の女の子です。',
     profileLines: [
@@ -19,7 +19,7 @@ window.CATS = [
     name: 'クロ',
     age: '1歳',
     gender: '男の子',
-    image: 'cat2.png',
+    image: 'image/cat2.png',
     alt: 'クロの写真',
     shortDescription: '1歳の男の子です。',
     profileLines: [
@@ -33,7 +33,7 @@ window.CATS = [
     name: 'キジトラ',
     age: '6歳',
     gender: '男の子',
-    image: 'cat3.png',
+    image: 'image/cat3.png',
     alt: 'キジトラの写真',
     shortDescription: '6歳の男の子です。',
     profileLines: [
@@ -47,7 +47,7 @@ window.CATS = [
     name: 'シロ',
     age: '3歳',
     gender: '男の子',
-    image: 'cat4.png',
+    image: 'image/cat4.png',
     alt: 'シロの写真',
     shortDescription: '3歳の男の子です。',
     profileLines: [
@@ -61,7 +61,7 @@ window.CATS = [
     name: 'チャトラ',
     age: '2歳',
     gender: '女の子',
-    image: 'cat5.png',
+    image: 'image/cat5.png',
     alt: 'チャトラの写真',
     shortDescription: '2歳の女の子です。',
     profileLines: [
@@ -75,7 +75,7 @@ window.CATS = [
     name: 'シロクロ',
     age: '1歳',
     gender: '男の子',
-    image: 'cat6.png',
+    image: 'image/cat6.png',
     alt: 'シロクロの写真',
     shortDescription: '1歳の男の子です。',
     profileLines: [
@@ -89,7 +89,7 @@ window.CATS = [
     name: 'フワフワ',
     age: '4歳',
     gender: '女の子',
-    image: 'cat7.png',
+    image: 'image/cat7.png',
     alt: 'フワフワの写真',
     shortDescription: '4歳の女の子です。',
     profileLines: [
@@ -103,7 +103,7 @@ window.CATS = [
     name: 'サビ',
     age: '3歳',
     gender: '女の子',
-    image: 'cat8.png',
+    image: 'image/cat8.png',
     alt: 'サビの写真',
     shortDescription: '3歳の女の子です。',
     profileLines: [

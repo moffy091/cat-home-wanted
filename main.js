@@ -1,7 +1,90 @@
-'use strict'
+'use strict';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const cats = window.CATS || [];
+const appConfig = window.APP_CONFIG || {};
+const localCats = Array.isArray(window.CATS) ? window.CATS : [];
+
+const buildImagePath = (path) => {
+  if (!path) {
+    return 'image/cat.png';
+  }
+
+  if (/^(https?:)?\/\//.test(path) || path.startsWith('/')) {
+    return path;
+  }
+
+  if (path.startsWith('image/')) {
+    return path;
+  }
+
+  return `image/${path}`;
+};
+
+const normalizeCat = (cat, index) => {
+  const profileLines = Array.isArray(cat.profileLines) && cat.profileLines.length
+    ? cat.profileLines
+    : [
+        cat.shortDescription || '',
+        cat.type ? `種類: ${cat.type}` : '',
+        cat.age ? `年齢: ${cat.age}` : '',
+        (cat.gender || cat.sex) ? `性別: ${cat.gender || cat.sex}` : '',
+        cat.status ? `募集状況: ${cat.status}` : '',
+        cat.description || ''
+      ].filter(Boolean);
+
+  return {
+    id: String(cat.id || `cat-${index + 1}`),
+    name: cat.name || `保護猫${index + 1}`,
+    age: cat.age || '',
+    gender: cat.gender || cat.sex || '',
+    type: cat.type || '',
+    status: cat.status || '',
+    image: buildImagePath(cat.image),
+    alt: cat.alt || `${cat.name || '保護猫'}の写真`,
+    shortDescription: cat.shortDescription || profileLines[0] || '',
+    description: cat.description || '',
+    profileLines
+  };
+};
+
+const createSupabaseClient = () => {
+  if (!window.supabase || !appConfig.supabaseUrl || !appConfig.supabaseAnonKey) {
+    return null;
+  }
+
+  return window.supabase.createClient(
+    appConfig.supabaseUrl,
+    appConfig.supabaseAnonKey
+  );
+};
+
+const loadCats = async () => {
+  const supabaseClient = createSupabaseClient();
+
+  if (!supabaseClient) {
+    return localCats.map(normalizeCat);
+  }
+
+  try {
+    const { data, error } = await supabaseClient
+      .from(appConfig.petsTable || 'pets')
+      .select('*');
+
+    if (error) {
+      throw error;
+    }
+
+    if (Array.isArray(data) && data.length) {
+      return data.map(normalizeCat);
+    }
+  } catch (error) {
+    console.warn('Supabaseから猫データを取得できなかったため、ローカルデータを使用します。', error);
+  }
+
+  return localCats.map(normalizeCat);
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cats = await loadCats();
   const page = document.body.dataset.page;
 
   const buildProfileUrl = (catId) => `profile.html?cat=${encodeURIComponent(catId)}`;
@@ -29,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const renderProfilePage = () => {
     const catId = getCatIdFromQuery();
-    const currentIndex = cats.findIndex((cat) => cat.id === catId);
+    const currentIndex = cats.findIndex((cat) => String(cat.id) === catId);
     const activeIndex = currentIndex >= 0 ? currentIndex : 0;
     const currentCat = cats[activeIndex];
 
@@ -48,10 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.title = `${currentCat.name}のプロフィール`;
     profileImage.src = currentCat.image;
     profileImage.alt = currentCat.alt;
-    profileText.innerHTML = [
-      `名前：${currentCat.name}`,
-      ...currentCat.profileLines
-    ].join('<br>');
+    profileText.innerHTML = currentCat.profileLines.join('<br>');
     contactLink.href = buildContactUrl(currentCat.id);
 
     const previousCat = cats[activeIndex - 1];
@@ -128,39 +208,29 @@ document.addEventListener('DOMContentLoaded', () => {
     renderThanksPage();
   }
 
-  // 拡大表示の対象にしたい画像を全て取得する
   const images = document.querySelectorAll('.zoomable-image');
 
-  // 対象画像がなければ何もしない
   if (!images.length) {
     return;
   }
 
-  // 拡大表示用の背景モーダルを作成する
   const modal = document.createElement('div');
   modal.className = 'zoom-modal';
   modal.setAttribute('aria-hidden', 'true');
 
-  // モーダル内に表示する拡大画像を作成する
   const modalImage = document.createElement('img');
   modalImage.alt = '';
 
-  // モーダルを閉じるためのボタンを作成する
   const closeButton = document.createElement('button');
   closeButton.className = 'zoom-modal-close';
   closeButton.type = 'button';
   closeButton.setAttribute('aria-label', '拡大画像を閉じる');
   closeButton.textContent = '閉じる';
 
-
-  // ボタンと画像モーダルに追加する
   modal.appendChild(closeButton);
   modal.appendChild(modalImage);
-
-  // 作成したモーダルをページ全体に追加する
   document.body.appendChild(modal);
 
-  // モーダルを閉じる処理
   const closeModal = () => {
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
@@ -168,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modalImage.alt = '';
   };
 
-  // クリックした画像をモーダル内に表示して開く処理
   const openModal = (image) => {
     modalImage.src = image.src;
     modalImage.alt = image.alt;
@@ -176,22 +245,18 @@ document.addEventListener('DOMContentLoaded', () => {
     modal.setAttribute('aria-hidden', 'false');
   };
 
-  // 各プロフィール画像にクリックイベントをつける
   images.forEach((image) => {
     image.addEventListener('pointerup', () => openModal(image));
- 
   });
 
-  // 閉じるボタンを押したらモーダルを閉じる
   closeButton.addEventListener('click', closeModal);
 
-  // 背景部分をクリックしたときだけモーダルを閉じる
   modal.addEventListener('click', (event) => {
     if (event.target === modal) {
       closeModal();
     }
   });
-  // Escキーでモーダルを閉じる
+
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && modal.classList.contains('is-open')) {
       closeModal();
